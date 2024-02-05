@@ -10,7 +10,7 @@ export const drawObject = (
   context: CanvasRenderingContext2D | null,
   body: IBoardObject[],
   color: string,
-  strokeStyle = '#146356',
+  strokeStyle = '#000',
 ) => {
   if (context) {
     body.forEach((item: IBoardObject) => {
