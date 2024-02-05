@@ -1,17 +1,22 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
-import { gameReducer } from './reducers';
-import { watcherSagas } from './sagas';
+/* import createSagaMiddleware from 'redux-saga';
+import { watcherSagas } from './sagas'; */
+import { snakeReducer } from './reducers/snakeReducer';
 
 const rootReducer = combineReducers({
-  gameReducer,
-});
-const sagaMiddleware = createSagaMiddleware();
-
-export const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware),
+  snakeReducer,
 });
 
-sagaMiddleware.run(watcherSagas);
+/* const sagaMiddleware = createSagaMiddleware();
+ */
+export const setupStore = () => {
+  return configureStore({
+    reducer: rootReducer,
+  });
+};
+
+/* sagaMiddleware.run(watcherSagas); */
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];
